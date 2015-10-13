@@ -1,0 +1,28 @@
+Short description of the GETM process:
+	GETM is composed of two parts: an anatomical NER server, and the main GETM software. GETM contacts the NER server for anatomical NER, contacts a database for gene NER (these need to have been computed prior to the execution of GETM), performs trigger detection, and processes the results. Output is written to an output file.
+	
+	The steps required to run GETM are described below.
+	
+	If you run into problems, find bugs or simply have general comments, don't hesitate to contact me at martin.gerner@postgrad.manchester.ac.uk
+
+1) Set up database:
+	You will need a MySQL database to store the anatomical dictionaries and the gene NER data. This can be downloaded from www.mysql.com. 
+
+	i) Install and start the MySQL database, and create a database schema and user for GETM (you can use previously existing schemas/users as well of course, but it's nice to have a bit of separation).
+	
+	ii) Import the data:
+		Import the data from getm/data/anatomy/getm-anatomy-dump.sql into the database. This should create two tables, "Anatomy" and "CellLines". These are your anatomical dictionaries.
+		
+		Create a table according to getm/data/getm-gene-table-template.sql (the name and charset can be changed of course, but the columns need to have the names and types specified). You will need to perform gene/protein NER on your documents, and insert the results into this table. The details inserted will include the document name (need to match the name of the text file, without the file suffix), gene id (this is what will be reported in the final output file), start and end coordinate locations of the mention in the text, the mention text (e.g. "IL-2") and, optionally, a comment (this field is not used by GETM).
+	
+	iii) Edit the getm/data/properties-db.conf file, inserting the hostname, schema name, username and password required to access the database.
+
+2) Start the anatomical NER server:
+	i) Edit the line indicated in the getm/data/anatomy/properties.conf file, specifying the path of the anatomy directory (you can also change the port on which the server will listen, if you'd like)
+	
+	ii) On the machine that you would like to run the server on, run java -Xmx4G -jar getm/bin/linnaeus.jar --properties getm/data/properties-db.conf getm/data/anatomy/properties.conf
+
+3) Run main GETM software:
+	i) Edit getm/data/getm/properties.conf, specifying the path of the getm data folder, the anatomical NER server hostname and port and the table name for the gene NER data.
+	
+	ii): Run GETM: java -Xmx1G -jar getm/bin/getm.jar --properties getm/data/properties-db.conf getm/data/getm/properties.conf --textDir <text directory> --recursive --out <output file path>

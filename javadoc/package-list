@@ -1,0 +1,16 @@
+dk.brics.automaton
+martin.common
+martin.common.compthreads
+martin.common.r
+martin.common.xml
+uk.ac.man.entitytagger
+uk.ac.man.entitytagger.doc
+uk.ac.man.entitytagger.entities.misc
+uk.ac.man.entitytagger.entities.species
+uk.ac.man.entitytagger.evaluate
+uk.ac.man.entitytagger.generate
+uk.ac.man.entitytagger.matching
+uk.ac.man.entitytagger.matching.matchers
+uk.ac.man.entitytagger.networking
+uk.ac.man.getm
+uk.ac.man.getm.evaluation

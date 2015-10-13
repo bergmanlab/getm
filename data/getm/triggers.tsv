@@ -1,0 +1,11 @@
+exp1	(over-?|co-?|ectopically |strongly |abundantly )?expres(sed|s)
+n-exp1	(not |negatively |under-)expressed
+
+exp2	([Oo]ver-?|[Cc]o-?|[Ee]ctopical |[Ss]trong |[Aa]bundan )?[Ee]xpression
+n-exp2	(no |negative |under-)expression
+
+exp3	[Pp]roduction
+n-exp3	(no |negative |under-)[Pp]roduction
+
+exp4	[Tr]anscription|[Tt]transcribed
+n-exp4	(no | not | negative | negatively |under-)(transcription|transcribed)
